@@ -1,0 +1,18 @@
+{% extends "Layout/base_admin.twig" %}
+{% block script %}
+    {{ View.Html.script({0: '/datatables/js/jquery.dataTables.js'}) }}
+{% endblock %}
+
+{% block stylesheet %}
+    {{ View.Html.css({0: '/datatables/css/jquery.dataTables.css'}) }}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>
+            {{ title_for_layout }}
+            {{ View.Html.link(__d('pages', 'Add New'), {'action': 'add'}, {'class': 'btn btn-default btn-xs'}) }}
+        </h2>
+    </div>
+    {{ table }}
+{% endblock %}

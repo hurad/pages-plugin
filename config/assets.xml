@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assetic>
+    <assets>
+        <asset name="data_tables_js">
+            <source>%bower_asset_path%/datatables/media/js/jquery.dataTables.js</source>
+            <destination>datatables/js/jquery.dataTables.js</destination>
+        </asset>
+        <asset name="data_tables_css">
+            <source>%bower_asset_path%/datatables/media/css/jquery.dataTables.css</source>
+            <destination>datatables/css/jquery.dataTables.css</destination>
+        </asset>
+        <asset name="moment_js">
+            <source>%bower_asset_path%/moment/moment.js</source>
+            <destination>js/moment.js</destination>
+        </asset>
+        <asset name="bootstrap_datetimepicker_js">
+            <source>%bower_asset_path%/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js</source>
+            <destination>js/bootstrap-datetimepicker.min.js</destination>
+        </asset>
+        <asset name="bootstrap_datetimepicker_css">
+            <source>%bower_asset_path%/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css</source>
+            <destination>css/bootstrap-datetimepicker.css</destination>
+        </asset>
+    </assets>
+    <static>
+        <files>
+            <file name="data_tables_images">
+                <source>%bower_asset_path%/datatables/media/images/*.png</source>
+                <destination>datatables/images/</destination>
+            </file>
+        </files>
+    </static>
+</assetic>

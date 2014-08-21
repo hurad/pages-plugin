@@ -1,0 +1,74 @@
+{% extends "Layout/base_admin.twig" %}
+{% block script %}
+    {{ View.Html.script({0: 'moment', 1: 'bootstrap-datetimepicker.min'}) }}
+{% endblock %}
+
+{% block stylesheet %}
+    {{ View.Html.css({0: 'bootstrap-datetimepicker'}) }}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>{{ title_for_layout }}</h2>
+    </div>
+
+    {{ View.Form.create(page) }}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group{% if View.Form.isFieldError('title') %} has-error{% endif %}">
+                {{ View.Form.input('title', {'type': 'text', 'class': 'form-control postTitle', 'label': false, 'placeholder': __d('pages', 'Enter title here')}) }}
+            </div>
+            <div class="form-group{% if View.Form.isFieldError('slug') %} has-error{% endif %}">
+                {{ View.Form.input('slug', {'type': 'text', 'class': 'form-control postSlug', 'label': false, 'placeholder': __d('pages', 'Enter slug here')}) }}
+            </div>
+            <div class="form-group">
+                {{ View.Form.input('content', {'class': 'form-control editor', 'label': false, 'type': 'textarea'}) }}
+            </div>
+            {#<?php echo $this->Content->loadMetaBoxes('Page.center'); ?>#}
+        </div>
+        <div class="col-md-4">
+            <div class="column">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ __d('pages', 'Publish') }}</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            {{ View.Form.label('status', __d('pages', 'Page Status:'), {'class': 'control-label'}) }}
+                            {{ View.Form.input('status', {'class': 'form-control', 'label': false, 'options': staticCall('Pages\\Model\\Entity\\Page', 'getStatusOptions', {0: constant('Pages\\Model\\Entity\\Page::STATUS_PUBLISH'), 1: constant('Pages\\Model\\Entity\\Page::STATUS_PENDING'), 2: constant('Pages\\Model\\Entity\\Page::STATUS_DRAFT')})}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ View.Form.label('comment_status', __d('pages', 'Comment Status:'), {'class': 'control-label'}) }}
+                            {{ View.Form.input('comment_status', {'class': 'form-control', 'label': false, 'options': staticCall('Pages\\Model\\Entity\\Page', 'getCommentStatusOptions')}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ View.Form.label('created_at', __d('pages', 'Publish date:'), {'class': 'control-label'}) }}
+                            <div id="datetimepicker" class="input-group date">
+                            <span class="input-group-addon">
+                            <span data-time-icon="glyphicon glyphicon-time"
+                                  data-date-icon="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                {{ View.Form.input('created_at', {'type': 'text', 'class': 'form-control', 'label': false, 'data-format': 'dd/MM/yyyy hh:mm:ss', 'value': date('now').format('d/m/Y H:i:s')}) }}
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker').datetimepicker({
+                                        pick24HourFormat: true
+                                    });
+                                });
+                            </script>
+                        </div>
+                        {{ View.Form.button(__d('pages', 'Edit'), {'type': 'submit', 'class': 'btn btn-primary'}) }}
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ __d('pages', 'Page Attributes') }}</div>
+                    <div class="panel-body">
+                        {{ View.Form.label('parent_id', __d('pages', 'Parent'), {'class': 'control-label'}) }}
+                        {{ View.Form.select('parent_id', parentPages, {'empty': __d('pages', '(No Parent)'), 'label': false, 'class': 'form-control'}) }}
+                    </div>
+                </div>
+                {#<?php echo $this->Content->loadMetaBoxes('Page.side'); ?>#}
+            </div>
+        </div>
+    </div>
+    {{ View.Form.end() }}
+{% endblock %}
